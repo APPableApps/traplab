@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Trap Lab – AI Rap/Hip-Hop Mixer</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<div class="app-shell">
+
+    <!-- Header / Brand -->
+    <header class="app-header">
+        <div class="brand">
+            <div class="brand-badge">TL</div>
+            <div class="brand-text">
+                <h1>TrapLab Studios</h1>
+                <span>Local AI mix lab for rap & hip-hop</span>
+            </div>
+        </div>
+        <div class="app-header-right">
+            <div>Running on your machine • Private • Offline</div>
+            <div class="hint">Standard • AI • Hybrid • Cleanup • Mastering</div>
+        </div>
+    </header>
+
+    <!-- Main -->
+    <main class="app-main">
+
+        <div class="panel-grid">
+
+            <!-- STANDARD MIX -->
+            <section class="panel">
+                <h2>Standard Mix <span class="badge">Presets</span></h2>
+                <p class="panel-tagline">
+                    Use your TrapLab presets & profiles for fast, consistent color on beats and vocals.
+                </p>
+
+                <form action="/process" method="post" enctype="multipart/form-data">
+                    <div>
+                        <label>Upload Audio:</label>
+                        <input type="file" name="audio_file" required>
+                    </div>
+
+                    <div>
+                        <label>Preset:</label>
+                        <select name="preset_name">
+                            {% for p in presets %}
+                                <option value="{{p}}">{{p}}</option>
+                            {% endfor %}
+                        </select>
+                        <div class="hint">
+                            Try “Trap Vocal Sauce” on dry vocals, “808 Punch” on subs, “2-Track Glue” on full beats.
+                        </div>
+                    </div>
+
+                    <div>
+                        <label>Profile (optional):</label>
+                        <select name="profile_name">
+                            <option value="">None</option>
+                            {% for pr in profiles %}
+                                <option value="{{pr}}">{{pr}}</option>
+                            {% endfor %}
+                        </select>
+                        <div class="hint">
+                            Profiles are saved gear chains you create inside TrapLab.
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-standard">
+                        Standard Mix
+                        <span class="sub">Use my preset chain</span>
+                    </button>
+                </form>
+            </section>
+
+            <!-- AI MIX -->
+            <section class="panel">
+                <h2>AI Mix (Rap / Hip-Hop) <span class="badge">AI</span></h2>
+                <p class="panel-tagline">
+                    Let TrapLab analyze the track and build the chain automatically for modern rap/hip-hop tone.
+                </p>
+
+                <form action="/ai_mix" method="post" enctype="multipart/form-data">
+                    <div>
+                        <label>Upload Audio:</label>
+                        <input type="file" name="audio_file" required>
+                    </div>
+
+                    <div>
+                        <label>AI Mode:</label>
+                        <select name="mode">
+                            <option value="rap_vocal">Rap Vocal (Lead)</option>
+                            <option value="rap_mix">Full Rap Mix (Beat + Vocals)</option>
+                        </select>
+                    </div>
+
+                    <div class="inline">
+                        <input type="checkbox" name="cleanup" id="cleanup_ai">
+                        <label for="cleanup_ai" class="hint">
+                            Auto vocal cleanup (noise gate + de-ess + gentle leveling)
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn-ai">
+                        AI MIX
+                        <span class="sub">Full AI chain on this track</span>
+                    </button>
+                </form>
+            </section>
+
+            <!-- HYBRID MIX -->
+            <section class="panel">
+                <h2>Hybrid Mix (Preset + AI) <span class="badge">Stacked</span></h2>
+                <p class="panel-tagline">
+                    First apply your preset (color/character), then optional cleanup, then AI finishes the mix.
+                </p>
+
+                <form action="/hybrid_mix" method="post" enctype="multipart/form-data">
+                    <div>
+                        <label>Upload Audio:</label>
+                        <input type="file" name="audio_file" required>
+                    </div>
+
+                    <div>
+                        <label>Base Preset (Color / Character):</label>
+                        <select name="preset_name">
+                            {% for p in presets %}
+                                <option value="{{p}}">{{p}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div>
+                        <label>AI Mode:</label>
+                        <select name="mode">
+                            <option value="rap_vocal">Rap Vocal (Lead)</option>
+                            <option value="rap_mix">Full Rap Mix (Beat + Vocals)</option>
+                        </select>
+                    </div>
+
+                    <div class="inline">
+                        <input type="checkbox" name="cleanup" id="cleanup_hybrid">
+                        <label for="cleanup_hybrid" class="hint">
+                            Auto vocal cleanup before AI (room noise + harsh “s”)
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn-hybrid">
+                        Hybrid Stack Mix
+                        <span class="sub">Preset → Cleanup → AI polish</span>
+                    </button>
+                </form>
+            </section>
+
+            <!-- AI MASTERING -->
+            <section class="panel">
+                <h2>AI Mastering (2-Track) <span class="badge">Final</span></h2>
+                <p class="panel-tagline">
+                    Drop in your final 2-track mix and get a streaming-ready or loud club master.
+                </p>
+
+                <form action="/master_mix" method="post" enctype="multipart/form-data">
+                    <div>
+                        <label>Upload Final Mix (WAV preferred):</label>
+                        <input type="file" name="audio_file" required>
+                    </div>
+
+                    <div>
+                        <label>Mastering Mode:</label>
+                        <select name="master_mode">
+                            <option value="streaming">Streaming / Playlist (clean, safe)</option>
+                            <option value="loud">Loud / Club (hard & aggressive)</option>
+                        </select>
+                        <div class="hint">
+                            Streaming: more headroom & safety. Loud: more compression & limiting for impact.
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-master">
+                        AI MASTER
+                        <span class="sub">Finish it for release</span>
+                    </button>
+                </form>
+            </section>
+
+        </div>
+    </main>
+
+    <footer class="app-footer">
+        TrapLab Studios • Running locally on your machine • Your mixes, your sound, your data.
+    </footer>
+</div>
+</body>
+</html>

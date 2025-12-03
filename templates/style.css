@@ -1,0 +1,247 @@
+/* Base layout */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+    "Segoe UI", sans-serif;
+    background: radial-gradient(circle at top left, #020617, #000);
+    color: #e5e7eb;
+}
+
+.app-shell {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header */
+
+.app-header {
+    padding: 16px 24px;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    backdrop-filter: blur(12px);
+    background: linear-gradient(to right, rgba(15, 23, 42, 0.95), rgba(24, 24, 27, 0.9));
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.brand-badge {
+    width: 32px;
+    height: 32px;
+    border-radius: 12px;
+    background: conic-gradient(from 220deg, #f97316, #a855f7, #22c55e, #f97316);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 22px rgba(248, 113, 113, 0.4);
+    font-size: 14px;
+    font-weight: 800;
+    color: #020617;
+}
+
+.brand-text h1 {
+    margin: 0;
+    font-size: 18px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+.brand-text span {
+    display: block;
+    margin-top: 2px;
+    font-size: 11px;
+    color: #9ca3af;
+}
+
+.app-header-right {
+    font-size: 11px;
+    color: #9ca3af;
+    text-align: right;
+}
+
+/* Main content */
+
+.app-main {
+    padding: 24px;
+    max-width: 1100px;
+    width: 100%;
+    margin: 0 auto 40px;
+}
+
+/* Cards / Panels */
+
+.panel-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
+    gap: 20px;
+}
+
+@media (max-width: 900px) {
+    .panel-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+.panel {
+    background: radial-gradient(circle at top left, #020617, #020617);
+    border-radius: 18px;
+    padding: 18px 18px 20px;
+    border: 1px solid rgba(148, 163, 184, 0.22);
+    box-shadow: 0 18px 40px rgba(15, 23, 42, 0.9);
+}
+
+.panel h2 {
+    margin: 0 0 4px;
+    font-size: 16px;
+}
+
+.panel-tagline {
+    margin: 0 0 16px;
+    font-size: 12px;
+    color: #9ca3af;
+}
+
+/* Forms */
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+label {
+    font-size: 12px;
+    color: #d1d5db;
+    margin-bottom: 4px;
+}
+
+input[type="file"],
+select,
+input[type="text"] {
+    padding: 8px 10px;
+    border-radius: 10px;
+    border: 1px solid rgba(75, 85, 99, 0.9);
+    background: rgba(15, 23, 42, 0.96);
+    color: #f9fafb;
+    font-size: 13px;
+    outline: none;
+}
+
+input[type="file"] {
+    padding: 6px;
+}
+
+input[type="file"]::file-selector-button {
+    border: none;
+    border-radius: 999px;
+    padding: 4px 10px;
+    margin-right: 8px;
+    background: rgba(15, 23, 42, 0.96);
+    color: #9ca3af;
+    font-size: 11px;
+    cursor: pointer;
+}
+
+select:focus,
+input[type="file"]:focus {
+    border-color: #6366f1;
+}
+
+/* Buttons */
+
+button {
+    border-radius: 999px;
+    padding: 9px 14px;
+    border: none;
+    font-size: 13px;
+    cursor: pointer;
+    font-weight: 600;
+    margin-top: 4px;
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+button span.sub {
+    font-weight: 400;
+    font-size: 11px;
+    opacity: 0.8;
+}
+
+/* Button variants */
+
+.btn-standard {
+    background: linear-gradient(to right, #4b5563, #111827);
+    color: #e5e7eb;
+}
+
+.btn-ai {
+    background: linear-gradient(135deg, #ec4899, #f97316);
+    color: #020617;
+}
+
+.btn-hybrid {
+    background: linear-gradient(135deg, #22c55e, #166534);
+    color: #020617;
+}
+
+.btn-master {
+    background: linear-gradient(135deg, #eab308, #f97316);
+    color: #020617;
+}
+
+/* Helpers */
+
+.hint {
+    font-size: 11px;
+    color: #9ca3af;
+    margin-top: -2px;
+}
+
+.inline {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 4px;
+}
+
+.inline input[type="checkbox"] {
+    width: 14px;
+    height: 14px;
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    background: rgba(56, 189, 248, 0.08);
+    border: 1px solid rgba(56, 189, 248, 0.5);
+    color: #7dd3fc;
+    margin-left: 6px;
+}
+
+/* Footer */
+
+.app-footer {
+    text-align: center;
+    padding: 10px 16px 18px;
+    font-size: 11px;
+    color: #6b7280;
+}
